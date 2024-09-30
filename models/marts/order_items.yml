@@ -93,9 +93,9 @@ metrics:
     label: Revenue
     type_params:
       measure: revenue
-  - name: order_cost
+  - name: order_total_cost
     description: Sum of cost for each order item.
-    label: Order Cost
+    label: Order Total Cost
     type: simple
     type_params:
       measure: order_cost

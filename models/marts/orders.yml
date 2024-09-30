@@ -75,6 +75,18 @@ metrics:
     label: Order Total
     type_params:
       measure: order_total
+  - name: order_cost
+    description: Cost of the order 
+    type: simple
+    label: Order Cost
+    type_params:
+      measure: order_cost
+  - name: order_tax
+    description: tax paid on order
+    type: simple
+    label: Order Tax
+    type_params:
+      measure: tax_paid
   - name: new_customer_orders
     description: New customer's first order count
     label: New Customers
@@ -113,6 +125,16 @@ metrics:
       measure: order_count
     filter: |
       {{ Dimension('order_id__is_drink_order') }} = true
+  - name: order_total_tax
+    description: order cost inclusive of tax 
+    label: Order Cost Plus Tax
+    type: derived
+    type_params:
+      expr: order_cost + order_tax
+      metrics:
+        - name: order_cost
+        - name: order_tax
+      
 
 saved_queries:
   - name: order_metrics
