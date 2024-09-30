@@ -53,8 +53,8 @@ metrics:
     type_params:
       expr: lifetime_spend_pretax / count_lifetime_orders
       metrics:
-        - count_lifetime_orders
-        - lifetime_spend_pretax
+        - name: count_lifetime_orders
+        - name: lifetime_spend_pretax
 
 
 
