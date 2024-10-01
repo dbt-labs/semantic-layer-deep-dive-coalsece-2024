@@ -42,13 +42,15 @@ metrics:
     label: LTV Pre-tax
     type: simple
     type_params:
-      measure: lifetime_spend_pretax
+      measure: 
+        name: lifetime_spend_pretax
   - name: count_lifetime_orders
     description: Count of lifetime orders
     label: Count Lifetime Orders
     type: simple
     type_params:
-      measure: count_lifetime_orders
+      measure: 
+        name: count_lifetime_orders
   - name: average_order_value
     description: LTV pre-tax / number of orders
     label: Average Order Value
