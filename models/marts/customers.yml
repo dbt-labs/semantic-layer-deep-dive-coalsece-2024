@@ -1,0 +1,4 @@
+semantic_models
+ -name: customers
+  description: customer record book, grain is one customer per row
+  model: ref('customers')
