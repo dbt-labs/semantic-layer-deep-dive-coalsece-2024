@@ -18,12 +18,12 @@ semantic_models:
         type: time
         type_params:
           time_granularity: day
-        expr: FIRST_ORDERED_AT
+        expr: date(FIRST_ORDERED_AT)
       - name: last_ordered_at
         type: time
         type_params:
           time_granularity: day
-        expr: LAST_ORDERED_AT
+        expr: date(LAST_ORDERED_AT)
 
     measures:
     - name: customer_lifetime_spend
