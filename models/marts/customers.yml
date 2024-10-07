@@ -1,0 +1,98 @@
+semantic_models:
+  - name: customers
+    description: One customer per row.
+    model:  ref('customers')
+    defaults:
+      agg_time_dimension: first_ordered_at
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: customer_name
+        type: categorical
+        expr: customer_name
+      - name: customer_type
+        type: categorical
+        expr: customer_type
+      - name: first_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+        expr: first_ordered_at
+      - name: last_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+        expr: last_ordered_at
+    measures:
+      - name: customers
+        description: Count of unique customers
+        agg: count_distinct
+        expr: customer_name
+      - name: count_lifetime_orders
+        description: Total count of orders per customer
+        agg: sum
+        expr: count_lifetime_orders
+      - name: lifetime_spend_pretax
+        description: Customer lifetime spend pre tax
+        agg: sum
+        expr: lifetime_spend_pretax
+      - name: lifetime_spend
+        description: Customer lifetime spend
+        agg: sum
+        expr: lifetime_spend_pretax
+
+metrics: 
+  # Simple type metrics
+  - name: customers
+    description: count of customers
+    type: simple
+    label: Customer Count
+    type_params:
+      measure:
+        name: customers
+  - name: count_lifetime_orders
+    description: Lifetime order count
+    type: simple
+    label: Lifetime Ordetrs
+    type_params:
+      measure:
+        name: count_lifetime_orders
+  - name: lifetime_spend_pretax
+    description: Lifetime spending pre tax per customer
+    type: simple
+    label: Lifetime Spend Pretax
+    type_params:
+      measure:
+        name: lifetime_spend_pretax
+  #   filter: |
+  #     {{ Metric('order_total', group_by=['order_id']) }} >=  20
+  # # Ratio type metric
+  # - name: "avg_order_value"
+  #   label: "avg_order_value"
+  #   description: "average value of each order"
+  #   type: ratio
+  #   type_params:
+  #     numerator: order_total
+  #     denominator: order_count
+  # # Cumulative type metrics
+  # - name: "cumulative_order_amount_mtd"
+  #   label: "cumulative_order_amount_mtd"
+  #   description: "The month to date value of all orders"
+  #   type: cumulative
+  #   type_params:
+  #     measure:
+  #       name: order_total
+  #     grain_to_date: month
+  # # Derived metric
+  # - name: "pct_of_orders_that_are_large"
+  #   label: "pct_of_orders_that_are_large"
+  #   description: "percent of orders that are large"
+  #   type: derived
+  #   type_params:
+  #     expr: large_orders/order_count
+  #     metrics:
+  #       - name: large_orders
+  #       - name: order_count
+
