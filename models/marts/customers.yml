@@ -72,6 +72,6 @@ metrics:
   label:  Average Spend per Customer
   type_params:
     numerator: 
-      name: customer_lifetime_spend
+      name: total_customer_lifetime_spend
     denominator: 
       name: total_customers
