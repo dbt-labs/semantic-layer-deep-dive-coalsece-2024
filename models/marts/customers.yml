@@ -1,0 +1,61 @@
+semantic_models:
+  - name: customers
+    description: customer record book, grain is one customer per row
+    model: ref('customers')
+    defaults:
+      agg_time_dimension: first_ordered_at
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: customer_name
+        type: categorical
+      - name: customer_type
+        type: categorical
+      - name: first_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: last_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: customers
+        description: Count of our unique customers
+        agg: count_distinct
+        expr: customer_name
+      - name: count_lifetime_orders
+        description: Total count of orders per customer
+        agg: sum
+      - name: lifetime_spend_pretax
+        description: Customer lifetime spend before taxes
+        agg: sum
+      - name: lifetime_spend
+        description: Gross customer lifetime spend
+        agg: sum
+metrics: 
+  # Simple type metrics
+  - name: customers
+    description: Count of customers
+    type: simple
+    label: Customer Count
+    type_params:
+      measure:
+        name: customers
+  - name: count_lifetime_orders
+    description: lifetime order count
+    type: simple
+    label: Lifetime Orders
+    type_params:
+      measure:
+        name: count_lifetime_orders
+  - name: lifetime_spend_pretax
+    description: Customer's lifetime spend before tax
+    label: LTV Pre-tax
+    type: simple
+    type_params:
+      measure:
+        name: lifetime_spend_pretax
+ 
