@@ -12,7 +12,7 @@ semantic_models:
 
     dimensions:
       - name: customer_type
-        type: Categorical
+        type: CATEGORICAL
         expr: CUSTOMER_TYPE
       - name: first_ordered_at
         type: time
@@ -30,16 +30,38 @@ semantic_models:
       description: customer spend after tax
       agg: sum
       expr: LIFETIME_SPEND
+
     - name: count_lifetime_orders
-      description: number of orders oer custiners
+      description: number of orders per customers
       agg: sum
       expr: COUNT_LIFETIME_ORDERS
+
+    - name: count_customers
+      description: number of customers
+      agg: count_distinct
+      expr: customer_id
       
 metrics:
 - name: total_customer_lifetime_spend
   description: Total lifetime spend by customer
   type: simple
-  label: Total Customer Sped
+  label: Total Customer Spend
   type_params:
     measure:
       name: customer_lifetime_spend
+
+- name: total_count_lifetime_orders
+  description: Total orders by customer
+  type: simple
+  label: Total Orders by Customer
+  type_params:
+    measure:
+      name: count_lifetime_orders
+
+- name: total_customers
+  description: Total number of customers
+  type: simple
+  label: Total Number of Customers
+  type_params:
+    measure:
+      name: count_customers
