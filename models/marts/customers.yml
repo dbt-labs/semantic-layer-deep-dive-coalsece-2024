@@ -65,3 +65,13 @@ metrics:
   type_params:
     measure:
       name: count_customers
+
+- name: average_spend_per_customer
+  description: Average Spend per Customer
+  type: ratio
+  label:  Average Spend per Customer
+  type_params:
+    numerator: 
+      name: customer_lifetime_spend
+    denominator: 
+      name: total_customers
