@@ -1,0 +1,64 @@
+semantic_models:
+  - name: customers
+    description: Customer record book
+    model: ref('customers')
+    defaults: 
+      agg_time_dimension: first_ordered_at
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: customer_name
+        type: categorical
+      - name: customer_type
+        type: categorical
+      - name: first_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: last_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: customers
+        description: Count of our customers
+        agg: count_distinct
+        expr: customer_name
+      - name: count_lifetime_orders
+        description: Count of lifetime orders
+        agg: sum
+      - name: lifetime_spend
+        description: Lifetime spend of customers
+        agg: sum
+      - name: lifetime_spend_pretax
+        description: Lifetime spend of customers pretax
+        agg: sum
+      - name: lifetime_tax_paid
+        description: Lifetime taxes paid of customers
+        agg: sum
+metrics: 
+  # Simple type metrics
+  - name: customers
+    description: Count of customers
+    type: simple
+    label: "Customer Count"
+    type_params:
+      measure:
+        name: customers
+  - name: count_lifetime_orders
+    description: Lifetime order count
+    type: simple
+    label: "Lifetime Orders"
+    type_params:
+      measure:
+        name: count_lifetime_orders
+  - name: lifetime_spend_pretax
+    description: Lifetime spend pretax
+    type: simple
+    label: "Lifetime Spend Pretax"
+    type_params:
+      measure:
+        name: lifetime_spend_pretax
+
