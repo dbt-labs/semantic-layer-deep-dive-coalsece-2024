@@ -1,0 +1,4 @@
+semantic_models:
+  - name: customers
+    description: cusomter report book, gran i s cust row
+    model: ref('customers')
