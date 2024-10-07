@@ -38,28 +38,28 @@ semantic_models:
 
 metrics:
  - name: customer_count
-   description:
-   lable: Customer Count
+   description: customer count
+   label: Customer Count
    type: simple
-   type_parms:
-    measure:
-      name: customer_count
+   type_params:
+      measure:
+        name: customer_count
   
  - name: lifetime_spend_pretax
    description: Customer's lifetime spend before tax
    label: LTV Pre-tax
    type: simple
    type_params:
-     measure:
-       name: lifetime_spend_pretax
+      measure:
+        name: lifetime_spend_pretax
 
- - name: count_lifetime_orders
-   description: Count of lifetime orders
-   label: Count Lifetime Orders
-   type: simple
-   type_params:
-     measure:
-       name: count_lifetime_orders
+# - name: count_lifetime_orders
+#    description: Count of lifetime orders
+#    label: Count Lifetime Orders
+#    type: simple
+#    type_params:
+#       measure:
+#         name: count_lifetime_orders
 
   # - name: average_order_value
   #   description: LTV pre-tax / number of orders
