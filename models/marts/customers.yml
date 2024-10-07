@@ -1,0 +1,47 @@
+semantic_models:
+  - name: customers
+    description: Customer records book. One customer per row
+    model: ref('customers')
+    defaults:
+      agg_time_dimension: first_ordered_at
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    
+    dimensions:
+      - name: customer_name
+        type: categorical
+        expr: customer_name
+      - name: customer_type
+        type: categorical
+      - name: first_ordered_at
+        type: time
+        type_params:
+          time_granularity: day
+    
+    measures:
+      - name: customers
+        description: Count of unique customers
+        agg: count_distinct
+        expr: customer_name
+      - name: count_lifetime_orders
+        description: Total count of orders per customer
+        agg: sum
+      - name: lifetime_spend_pretax
+        description: Customer lifetime spend before taxes
+        agg: sum
+      - name: lifetime_spend
+        description: Gross customer lifetime spend
+        agg: sum
+      
+metrics: 
+  - name: "customers"
+    description: "Customer count"
+    type: simple
+    label: "Customer count"
+    type_params:
+      measure:
+        name: customers
+
+  
