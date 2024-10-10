@@ -2,9 +2,12 @@ semantic_models:
   - name: customers
     description: Customer grain mart.
     model: ref('customers')
+    defaults:
+        agg_time_dimension: first_ordered_at
+
     entities:
       - name: customer
-        type: primary        
+        type: primary
         expr: customer_id
     dimensions:
       - name: customer_name
@@ -12,10 +15,6 @@ semantic_models:
       - name: customer_type
         type: categorical
       - name: first_ordered_at
-        type: time
-        type_params:
-          time_granularity: day
-      - name: last_ordered_at
         type: time
         type_params:
           time_granularity: day
@@ -43,7 +42,6 @@ metrics:
      measure:
        name: lifetime_spend_pretax
 
-
  - name: count_lifetime_orders
    description: Count of lifetime orders
    label: Count Lifetime Orders
@@ -51,15 +49,3 @@ metrics:
    type_params:
      measure:
        name: count_lifetime_orders
-
-
-  # - name: average_order_value
-  #   description: LTV pre-tax / number of orders
-  #   label: Average Order Value
-  #   type: derived
-  #   type_params:
-  #     expr: lifetime_spend_pretax / count_lifetime_orders
-  #     metrics:
-  #       - name: count_lifetime_orders
-  #       - name: lifetime_spend_pretax
-
