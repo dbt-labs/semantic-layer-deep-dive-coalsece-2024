@@ -44,6 +44,14 @@ metrics:
      measure:
        name: lifetime_spend_pretax
 
+ - name: lifetime_spend_cust_type
+   description: lifetime spend before tax per customer type
+   label: LTV Pre-tax Cust Type
+   type: simple
+   type_params:
+     measure:
+       name: lifetime_spend_pretax
+
  - name: count_lifetime_orders
    description: Count of lifetime orders
    label: Count Lifetime Orders
